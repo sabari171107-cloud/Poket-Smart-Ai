@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PocketSmart AI</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div>
+        <span class="eyebrow">SMART MONEY, SIMPLIFIED</span>
+        <h1>PocketSmart AI</h1>
+        <p>Understand your monthly spending and get practical recommendations.</p>
+      </div>
+      <div class="badge">Budget Assistant</div>
+    </header>
+
+    <section class="grid">
+      <form id="budget-form" class="panel">
+        <h2>Your monthly budget</h2>
+        <div class="two">
+          <label>Monthly income
+            <input id="income" type="number" min="1" step="0.01" value="50000" required>
+          </label>
+          <label>Savings goal
+            <input id="goal" type="number" min="0" step="0.01" value="10000">
+          </label>
+          <label>Currency
+            <select id="currency">
+              <option>INR</option><option>USD</option><option>EUR</option><option>GBP</option>
+            </select>
+          </label>
+          <label>AI provider
+            <select id="provider">
+              {% for provider in providers %}
+              <option value="{{ provider }}">{{ provider|title }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        </div>
+
+        <div class="section-title">
+          <h3>Expenses</h3>
+          <button type="button" class="secondary" id="add-expense">+ Add</button>
+        </div>
+        <div id="expenses"></div>
+        <button class="primary" type="submit">Analyze my budget</button>
+        <p id="error" class="error" role="alert"></p>
+      </form>
+
+      <section id="results" class="panel results hidden" aria-live="polite">
+        <h2>Budget snapshot</h2>
+        <div class="metrics">
+          <div><span>Total expenses</span><strong id="total"></strong></div>
+          <div><span>Remaining</span><strong id="remaining"></strong></div>
+          <div><span>Income used</span><strong id="ratio"></strong></div>
+        </div>
+        <h3>Recommendations</h3>
+        <ul id="tips"></ul>
+        <div class="ai-card">
+          <span class="eyebrow">AI RECOMMENDATION</span>
+          <p id="ai-advice"></p>
+        </div>
+        <small>Educational guidance only—not financial, tax, or legal advice.</small>
+      </section>
+    </section>
+  </main>
+
+  <template id="expense-template">
+    <div class="expense-row">
+      <input class="category" placeholder="Category" required>
+      <input class="amount" type="number" min="0" step="0.01" placeholder="Amount" required>
+      <button type="button" class="remove" aria-label="Remove expense">×</button>
+    </div>
+  </template>
+  <script src="/static/app.js"></script>
+</body>
+</html>
