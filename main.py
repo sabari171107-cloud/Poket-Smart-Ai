@@ -7,20 +7,20 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from app.models import BudgetRequest, BudgetResponse
-from app.services.ai import PROVIDERS, get_ai_advice
-from app.services.budget import analyze_budget, local_recommendations
+from models import BudgetRequest, BudgetResponse
+from ai import PROVIDERS, get_ai_advice
+from budget import analyze_budget, local_recommendations
 
 load_dotenv()
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
 app = FastAPI(
     title="PocketSmart AI",
     description="Smart budget analysis and multi-provider AI recommendations.",
     version="1.0.0",
 )
-app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
-templates = Jinja2Templates(directory=BASE_DIR / "templates")
+app.mount("/static", StaticFiles(directory=BASE_DIR), name="static")
+templates = Jinja2Templates(directory=BASE_DIR)
 
 
 @app.get("/", response_class=HTMLResponse)
