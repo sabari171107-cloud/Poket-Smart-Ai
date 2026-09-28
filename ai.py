@@ -2,7 +2,7 @@ import os
 
 import httpx
 
-from app.models import BudgetRequest, BudgetSummary
+from models import BudgetRequest, BudgetSummary
 
 
 OPENAI_COMPATIBLE = {
