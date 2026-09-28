@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from app.models import BudgetRequest, BudgetSummary
+from models import BudgetRequest, BudgetSummary
 
 
 def analyze_budget(data: BudgetRequest) -> BudgetSummary:
